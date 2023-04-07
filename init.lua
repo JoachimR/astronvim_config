@@ -17,7 +17,7 @@ return {
     },
   },
   -- Set colorscheme to use
-  colorscheme = "tokyonight",
+  colorscheme = "catppuccin-macchiato",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = true,
@@ -75,5 +75,9 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+    -- volar take over mode
+    require("lspconfig").volar.setup {
+      filetypes = { "vue" },
+    }
   end,
 }
