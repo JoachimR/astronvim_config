@@ -28,7 +28,7 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = true,     -- enable or disable format on save globally
+        enabled = false,    -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -75,9 +75,24 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+    require "stay-centered"
+    require("better_escape").setup {
+      mapping = { "bb", "jj", "kk" },
+    }
+
     -- volar take over mode
     require("lspconfig").volar.setup {
       filetypes = { "vue" },
+    }
+
+    -- eslint on save
+    require("lspconfig").eslint.setup {
+      on_attach = function(_, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          command = "EslintFixAll",
+        })
+      end,
     }
   end,
 }

@@ -26,4 +26,7 @@ return {
       { "nvim-treesitter/nvim-treesitter" },
     },
   },
+  {
+    "arnamak/stay-centered.nvim",
+  },
 }

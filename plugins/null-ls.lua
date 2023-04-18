@@ -10,8 +10,10 @@ return {
     config.sources = {
       -- Set a formatter
       -- null_ls.builtins.formatting.stylua,
-      -- null_ls.builtins.formatting.prettier,
+      -- require("null-ls").builtins.formatting.prettier,
+      -- require("null-ls").builtins.formatting.eslint_d,
     }
+
     return config -- return final config table
   end,
 }
