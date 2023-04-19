@@ -82,7 +82,7 @@ return {
 
     -- volar take over mode
     require("lspconfig").volar.setup {
-      filetypes = { "vue" },
+      filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
     }
 
     -- eslint on save
