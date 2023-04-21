@@ -28,7 +28,7 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = false,    -- enable or disable format on save globally
+        enabled = true,     -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -63,31 +63,42 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    -- Set up custom filetypes
-    -- vim.filetype.add {
-    --   extension = {
-    --     foo = "fooscript",
-    --   },
-    --   filename = {
-    --     ["Foofile"] = "fooscript",
-    --   },
-    --   pattern = {
-    --     ["~/%.config/foo/.*"] = "fooscript",
-    --   },
-    -- }
     require "stay-centered"
     require("better_escape").setup {
       mapping = { "bb", "jj", "kk" },
     }
 
-    -- volar take over mode
+    -- VOLAR
     require("lspconfig").volar.setup {
       filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
     }
+    local util = require "lspconfig.util"
+    local function get_typescript_server_path(root_dir)
+      -- local global_ts = "/home/[yourusernamehere]/.npm/lib/node_modules/typescript/lib
+      -- Alternative location if installed as root:
+      -- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
+      local global_ts = "/usr/local/lib/node_modules/typescript/lib"
+      local found_ts = ""
+      local function check_dir(path)
+        found_ts = util.path.join(path, "node_modules", "typescript", "lib")
+        if util.path.exists(found_ts) then return path end
+      end
+      if util.search_ancestors(root_dir, check_dir) then
+        return found_ts
+      else
+        return global_ts
+      end
+    end
+    require("lspconfig").volar.setup {
+      on_new_config = function(new_config, new_root_dir)
+        new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
+      end,
+    }
 
-    -- eslint on save
+    -- ESLINT
     require("lspconfig").eslint.setup {
-      on_attach = function(_, bufnr)
+      root_dir = util.root_pattern ".git",
+      on_attach = function(client, bufnr)
         vim.api.nvim_create_autocmd("BufWritePre", {
           buffer = bufnr,
           command = "EslintFixAll",
