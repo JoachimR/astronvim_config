@@ -31,6 +31,10 @@ return {
       function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
       desc = "Previous buffer",
     },
+    ["<C-m>"] = {
+      vim.diagnostic.goto_next,
+      desc = "Go to next issue",
+    },
   },
   t = {
     -- setting a mapping to false will disable it
