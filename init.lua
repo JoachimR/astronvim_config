@@ -63,10 +63,6 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    require "stay-centered"
-    require("better_escape").setup {
-      mapping = { "bb", "jj", "kk" },
-    }
 
     local util = require "lspconfig.util"
     -- -- VOLAR

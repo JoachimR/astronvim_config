@@ -21,12 +21,32 @@ return {
   },
   {
     "ThePrimeagen/refactoring.nvim",
+    event = "VeryLazy",
     requires = {
       { "nvim-lua/plenary.nvim" },
       { "nvim-treesitter/nvim-treesitter" },
     },
+    config = function()
+      vim.api.nvim_set_keymap(
+        "v",
+        "<leader>rr",
+        ":lua require('refactoring').select_refactor()<CR>",
+        { noremap = true, silent = true, expr = false, desc = "Select refactoring" }
+      )
+    end,
+  },
+  {
+    "max397574/better-escape.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("better_escape").setup {
+        mapping = { "bb", "jj", "kk" },
+      }
+    end,
   },
   {
     "arnamak/stay-centered.nvim",
+    event = "VeryLazy",
+    config = function() require "stay-centered" end,
   },
 }
