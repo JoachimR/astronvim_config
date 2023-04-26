@@ -98,5 +98,19 @@ return {
         })
       end,
     }
+
+    -- start jest for current file in toggle terminal
+    local function get_current_buffer_info()
+      local bufnr = vim.api.nvim_get_current_buf()
+      local filename = vim.api.nvim_buf_get_name(bufnr)
+      local directory = vim.fn.fnamemodify(filename, ":p:h")
+      return directory, filename
+    end
+    local function run_jest()
+      local directory, filename = get_current_buffer_info()
+      local command = 'TermExec cmd="pnpm jest ' .. filename .. '" dir=' .. directory
+      vim.cmd(command)
+    end
+    vim.keymap.set("n", "<leader>oo", run_jest, { silent = true, noremap = true, desc = "Test nearest" })
   end,
 }
