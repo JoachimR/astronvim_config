@@ -71,7 +71,7 @@ return {
       { "nvim-treesitter/nvim-treesitter" },
     },
     config = function()
-      vim.api.nvim_set_keymap(
+      vim.keymap.set(
         "v",
         "<leader>rr",
         ":lua require('refactoring').select_refactor()<CR>",
@@ -87,10 +87,5 @@ return {
         mapping = { "bb", "jj", "kk" },
       }
     end,
-  },
-  {
-    "arnamak/stay-centered.nvim",
-    event = "VeryLazy",
-    config = function() require "stay-centered" end,
   },
 }
