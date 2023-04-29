@@ -28,12 +28,14 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = false,    -- enable or disable format on save globally
+        enabled = true,     -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
+          "ts",
+          "vue",
         },
       },
       disabled = { -- disable formatting capabilities for the listed language servers
@@ -88,7 +90,7 @@ return {
     --   end,
     -- }
     --
-    -- ESLINT
+    -- eslint
     require("lspconfig").eslint.setup {
       root_dir = util.root_pattern ".git",
       on_attach = function(client, bufnr)
@@ -106,11 +108,19 @@ return {
       local directory = vim.fn.fnamemodify(filename, ":p:h")
       return directory, filename
     end
-    local function run_jest()
+    local function save_and_run_jest()
       local directory, filename = get_current_buffer_info()
+      vim.cmd "w"
       local command = 'TermExec cmd="pnpm jest ' .. filename .. '" dir=' .. directory
       vim.cmd(command)
     end
-    vim.keymap.set("n", "<leader>oo", run_jest, { silent = true, noremap = true, desc = "Test nearest" })
+    vim.keymap.set("n", "<leader>oo", save_and_run_jest, { silent = true, noremap = true, desc = "Test file" })
+
+    -- fix path display in telescope
+    require("telescope").setup {
+      defaults = {
+        path_display = { "smart" },
+      },
+    }
   end,
 }
