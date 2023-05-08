@@ -30,10 +30,12 @@ return {
         end
       end
 
-      local function enable()
+      local function enable(dir)
         if vim.g.codeium_enabled == false then
           vim.cmd "CodeiumEnable"
-          vim.notify "Codeium enabled"
+          local reason = ""
+          if dir then reason = " (due to access to '" .. dir .. "')" end
+          vim.notify("Codeium enabled" .. reason)
         end
       end
 
@@ -55,7 +57,7 @@ return {
           local dir_name = path_components[i]
           if vim.tbl_contains(disable_on_directories, dir_name) then return disable(dir_name) end
         end
-        enable()
+        enable(abs_path)
       end
       vim.api.nvim_create_autocmd({ "BufEnter" }, {
         pattern = { "*" },

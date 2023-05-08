@@ -22,7 +22,9 @@ return {
     ["<leader>b"] = { name = "Buffers" },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
-    ["<leader>gs"] = { "<cmd>Telescope git_status<CR>", desc = "status" },
+
+    ["<leader>gs"] = { "<cmd>Telescope git_status<CR>", desc = "Find all git unstaged files" },
+
     ["<S-l>"] = {
       function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
       desc = "Next buffer",
@@ -31,13 +33,29 @@ return {
       function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
       desc = "Previous buffer",
     },
+
     ["<C-m>"] = {
       vim.diagnostic.goto_next,
       desc = "Go to next issue",
+    },
+
+    ["<C-b>"] = {
+      "<cmd>Gitsigns prev_hunk<CR>",
+      desc = "Go to previous hunk",
+    },
+    ["<C-n>"] = {
+      "<cmd>Gitsigns next_hunk<CR>",
+      desc = "Go to next hunk",
     },
   },
   t = {
     -- setting a mapping to false will disable it
     -- ["<esc>"] = false,
+  },
+  v = {
+    ["p"] = {
+      '"_dP',
+      desc = "paste+replace without losig yanked text",
+    },
   },
 }

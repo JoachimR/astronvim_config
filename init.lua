@@ -17,7 +17,8 @@ return {
     },
   },
   -- Set colorscheme to use
-  colorscheme = "catppuccin-macchiato",
+  colorscheme = "catppuccin-mocha",
+  -- colorscheme = "tokyonight",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = true,
@@ -34,12 +35,12 @@ return {
         },
         ignore_filetypes = { -- disable format on save for specified filetypes
           -- "python",
-          "ts",
-          "vue",
         },
       },
       disabled = { -- disable formatting capabilities for the listed language servers
         -- "sumneko_lua",
+        "tsserver",
+        "volar",
       },
       timeout_ms = 1000, -- default format timeout
       -- filter = function(client) -- fully override the default formatting function
@@ -89,7 +90,7 @@ return {
     --     new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
     --   end,
     -- }
-    --
+
     -- eslint
     require("lspconfig").eslint.setup {
       root_dir = util.root_pattern ".git",
@@ -111,7 +112,7 @@ return {
     local function save_and_run_jest()
       local directory, filename = get_current_buffer_info()
       vim.cmd "w"
-      local command = 'TermExec cmd="pnpm jest ' .. filename .. '" dir=' .. directory
+      local command = 'TermExec direction=vertical size=80 cmd="pnpm jest ' .. filename .. '" dir=' .. directory
       vim.cmd(command)
     end
     vim.keymap.set("n", "<leader>oo", save_and_run_jest, { silent = true, noremap = true, desc = "Test file" })
@@ -119,7 +120,7 @@ return {
     -- fix path display in telescope
     require("telescope").setup {
       defaults = {
-        path_display = { "smart" },
+        path_display = { "truncate" },
       },
     }
   end,
