@@ -39,7 +39,7 @@ return {
       desc = "Go to next issue",
     },
 
-    ["<C-b>"] = {
+    ["<C-j>"] = {
       "<cmd>Gitsigns prev_hunk<CR>",
       desc = "Go to previous hunk",
     },

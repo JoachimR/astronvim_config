@@ -18,7 +18,7 @@ return {
     ui_notifications_enabled = true, -- disable notifications when toggling UI elements
     --
     -- disable or enable codeium
-    codeium_enabled = false,
+    -- codeium_enabled = true,
   },
 }
 -- If you need more control, you can use the function()...end notation
