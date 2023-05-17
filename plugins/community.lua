@@ -8,7 +8,7 @@ return {
   -- { import = "astrocommunity.colorscheme.tokyonight" },
 
   -- { import = "astrocommunity.completion.copilot-lua-cmp" },
-  { import = "astrocommunity.completion.codeium-vim" },
+  -- { import = "astrocommunity.completion.codeium-vim" },
 
   { import = "astrocommunity.pack.typescript" },
   -- { import = "astrocommunity.pack.go" },
