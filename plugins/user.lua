@@ -13,10 +13,30 @@ return {
     "Exafunction/codeium.vim",
     event = "VeryLazy",
     config = function()
-      vim.keymap.set("i", "<C-g>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
-      vim.keymap.set("i", "<c-;>", function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true })
-      vim.keymap.set("i", "<c-,>", function() return vim.fn["codeium#CycleCompletions"](-1) end, { expr = true })
-      vim.keymap.set("i", "<c-x>", function() return vim.fn["codeium#Clear"]() end, { expr = true })
+      vim.keymap.set(
+        "i",
+        "<C-g>",
+        function() return vim.fn["codeium#Accept"]() end,
+        { expr = true, desc = "Accept completions" }
+      )
+      vim.keymap.set(
+        "i",
+        "<c-;>",
+        function() return vim.fn["codeium#CycleCompletions"](1) end,
+        { expr = true, desc = "Cycle completions" }
+      )
+      vim.keymap.set(
+        "i",
+        "<c-,>",
+        function() return vim.fn["codeium#CycleCompletions"](-1) end,
+        { expr = true, desc = "Cycle completions" }
+      )
+      vim.keymap.set(
+        "i",
+        "<c-x>",
+        function() return vim.fn["codeium#Clear"]() end,
+        { expr = true, desc = "Clear completions" }
+      )
       vim.keymap.set("n", "<leader>;", function()
         if vim.g.codeium_enabled == true then
           vim.cmd "CodeiumDisable"
@@ -53,10 +73,10 @@ return {
         end
         enable(abs_path)
       end
-      vim.api.nvim_create_autocmd({ "BufEnter" }, {
-        pattern = { "*" },
-        callback = disable_on_directory_match,
-      })
+      -- vim.api.nvim_create_autocmd({ "BufEnter" }, {
+      --   pattern = { "*" },
+      --   callback = disable_on_directory_match,
+      -- })
     end,
   },
   {

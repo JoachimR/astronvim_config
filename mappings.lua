@@ -47,6 +47,23 @@ return {
       "<cmd>Gitsigns next_hunk<CR>",
       desc = "Go to next hunk",
     },
+    ["VV"] = {
+      "V$%",
+      desc = "select body",
+    },
+    ["<leader>i"] = {
+      "<cmd>:TypescriptAddMissingImports<CR>",
+      desc = "Typescript add missing imports",
+    },
+
+    ["<leader>a"] = {
+      "GVgg",
+      desc = "Select all",
+    },
+    ["<leader>aa"] = {
+      "GVggy",
+      desc = "Yank all",
+    },
   },
   t = {
     -- setting a mapping to false will disable it
