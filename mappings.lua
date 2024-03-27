@@ -55,15 +55,12 @@ return {
       "<cmd>:TypescriptAddMissingImports<CR>",
       desc = "Typescript add missing imports",
     },
-
-    ["<leader>a"] = {
-      "GVgg",
-      desc = "Select all",
-    },
-    ["<leader>aa"] = {
-      "GVggy",
-      desc = "Yank all",
-    },
+    ["n"] = { "nzz" },
+    ["N"] = { "Nzz" },
+    ["{"] = { "{zz" },
+    ["}"] = { "}zz" },
+    ["<C-d>"] = { "8jjzz" },
+    ["<C-u>"] = { "8kkzz" },
   },
   t = {
     -- setting a mapping to false will disable it
